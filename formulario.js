@@ -6,9 +6,11 @@ import {
   SafeAreaView,
   TextInput,
   DevSettings,
+  Button
 } from "react-native";
 import moment from "moment";
-import { Input, Button, ListItem, Text } from "react-native-elements";
+import { Input, ListItem, Text } from "react-native-elements";
+import {Restart} from 'fiction-expo-restart';
 
   const Formulario = () => {
     const [precioHora, setPrecioHora] = useState();
@@ -34,6 +36,8 @@ import { Input, Button, ListItem, Text } from "react-native-elements";
     V3: "00:00",
     V4: "00:00",
   });
+  // const startReload = ()=> {RNRestart.Restart()}
+ 
     var MONTO = (
     ((moment(horaTrabajadas.L2, "HH:mm")) - (moment(horaTrabajadas.L1, "HH:mm"))) +
     ((moment(horaTrabajadas.L4, "HH:mm")) - (moment(horaTrabajadas.L3, "HH:mm"))) +
@@ -52,6 +56,7 @@ import { Input, Button, ListItem, Text } from "react-native-elements";
       ...horaTrabajadas,
       [name]:text,
     });
+    
     };
   return (
     <ScrollView>
@@ -292,7 +297,7 @@ import { Input, Button, ListItem, Text } from "react-native-elements";
 
         <Button 
         title="Reiniciar"
-        onPress={()=> DevSettings.reload()} />
+        onPress={()=> Restart()} />
       </View>
      
       {/* <StatusBar style="auto" /> */}
