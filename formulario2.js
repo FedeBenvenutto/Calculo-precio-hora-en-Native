@@ -301,7 +301,7 @@ import { NavigationContainer } from "@react-navigation/native";
 
         <Button 
         title="Reiniciar"
-        onPress={()=>{navigation.navigate('F2')}} 
+        onPress={()=>{navigation.navigate('F1')}}  
         /> 
       </View>
      

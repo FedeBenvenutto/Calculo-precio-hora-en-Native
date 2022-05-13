@@ -10,14 +10,42 @@ import {
 import moment from "moment";
 import { Input, Button, ListItem, Text } from "react-native-elements";
 import Formulario from "./formulario";
+import Formulario2 from "./formulario2";
+import {createNativeStackNavigator} from '@react-navigation/native-stack'
+import { NavigationContainer } from "@react-navigation/native";
 
-export default function App() {
+export default function App({navigation}) {
+  // const [estado, setEstado] = useState();
+  const Stack= createNativeStackNavigator()
   return (
-    <View className= "container mt-5">
-       <Formulario />
-    </View>
+    <NavigationContainer>
+      <Stack.Navigator>
+        <Stack.Screen
+        name='F1'
+        component={Formulario} 
+        options={{
+          headerShown:false,
+          }}
+        />
+        <Stack.Screen
+        name='F2'
+        component={Formulario2} 
+        options={{
+          headerShown:false,
+          }}
+        />
+        
+          
+      </Stack.Navigator>
+
+    </NavigationContainer>
+    // <View className= "container mt-5">
+
+    //  {/* {estado===true ? <Formulario /> : <Formulario />} */}
+        // </View>
   );
 }
+
 
 const styles = StyleSheet.create({
   titulo: {
