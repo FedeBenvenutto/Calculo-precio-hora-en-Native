@@ -6,16 +6,21 @@
     "platforms": [
       "ios",
       "android"
-      ],
-
-    "assetBundlePatterns": [
-      "**/*"
     ],
+    "orientation": "portrait",
     "android": {
-      "package": "com.calculoprecio",
-      "versionCode": 1
+      "package": "com.federicoand.Calculoprecio"
     }
   },
-  "name": "Calculoprecio"
-  
+  "updates": {
+    "fallbackToCacheTimeout": 0
+  },
+  "assetBundlePatterns": [
+    "**/*"
+  ],
+  "ios": {},
+  "android": {
+    "package": "com.loricode.mynative",
+    "versionCode": 1
+  }
 }

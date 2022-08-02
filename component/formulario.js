@@ -380,24 +380,26 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
         <Text style={styles.textdiaserror}>
         {comprobarErrores ? 
           "Por favor corrija los errores"
-          : ""}
+          : CalculoTotal < 0 ?  
+          "El valor de finalización no puede ser 00:00"
+        : "" }
          </Text> 
         <Text style={styles.textdias}>
-        El valor total a pagar es $ {comprobarErrores ? "" : CalculoTotal}
+        El valor total a pagar es $ {comprobarErrores || CalculoTotal < 0 ? "" : CalculoTotal}
         </Text>
         
-
+        <View style={styles.buttton2}>
         <Button 
         containerStyle={{width: 350, marginHorizontal: 30, marginTop: 10}}
         title="Copiar valor lunes a la mañana al resto"
         onPress={()=> {Lunesmanana()}} 
         /> 
         <Button
-        containerStyle={{width: 320, marginHorizontal: 50, marginVertical: 10}}
+        containerStyle={{width: 320, marginHorizontal: 0, marginVertical: 10}}
         title="Copiar valor lunes a la tarde al resto"
         onPress={()=> {Lunestarde()}} 
         /> 
-        
+        </View>
         <View style={styles.buttton}>
         <Button 
         title="Guardar"
@@ -405,10 +407,9 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
         buttonStyle={{ backgroundColor: 'gray',}}
         /> 
         <Button 
-        buttonStyle={{ backgroundColor: 'red',}}
+        buttonStyle={{ backgroundColor: 'red', marginLeft: 40}}
         title="Reiniciar"
         onPress={()=> {Reiniciar()}} 
-
         /> 
         </View>
       </View>
@@ -441,7 +442,7 @@ const styles = StyleSheet.create({
     fontSize: 20,
   },
   textdiaserror: {
-    fontSize: 20,
+    fontSize: 17,
     color: "red",
     textAlign: "right",
   },
@@ -460,11 +461,11 @@ const styles = StyleSheet.create({
   },
   buttton: {
     flexDirection: 'row',
-    justifyContent: "space-between",
-    marginTop: 0,
-    marginRight: 90,
-    marginStart: 90
+    justifyContent: "center",
 
+  },
+  buttton2: {
+    alignItems:"center"
   },
 });
     
