@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Calculoprecio",
-    "slug": "Calculoprecio",
+    "name": "Calculo Precio-Hora",
+    "slug": "CalculoPrecioHora",
     "version": "1.0.0",
     "platforms": [
       "ios",
