@@ -194,7 +194,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
           ></TextInput>
         </SafeAreaView>
         <SafeAreaView style={styles.diasyhorarios}>
-          <Text style={styles.textdias}> Lunes a la mañana </Text>
+          <Text style={styles.textdias}> Lunes a la mañana</Text>
           <Input
             nombre="L1"
             handleHoraChange={handleHoraChange}
@@ -233,7 +233,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
         Por favor corrija este campo
          </Text></SafeAreaView>
         <SafeAreaView style={styles.diasyhorarios}>
-          <Text style={styles.textdias}> Martes a la mañana </Text>
+          <Text style={styles.textdias}> Martes a la mañana</Text>
           <Input
             nombre="M1"
             handleHoraChange={handleHoraChange}
@@ -252,7 +252,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
         Por favor corrija este campo
          </Text></SafeAreaView>
         <SafeAreaView style={styles.diasyhorarios}>
-          <Text style={styles.textdias}> Martes a la tarde </Text>
+          <Text style={styles.textdias}> Martes a la tarde</Text>
           <Input
             nombre="M3"
             handleHoraChange={handleHoraChange}
@@ -288,7 +288,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
         Por favor corrija este campo
          </Text></SafeAreaView>
         <SafeAreaView style={styles.diasyhorarios}>
-          <Text style={styles.textdias}> Miércoles a la tarde </Text>
+          <Text style={styles.textdias}> Miércoles a la tarde</Text>
           <Input
             nombre="I3"
             handleHoraChange={handleHoraChange}
@@ -306,7 +306,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
         Por favor corrija este campo
          </Text></SafeAreaView>
         <SafeAreaView style={styles.diasyhorarios}>
-          <Text style={styles.textdias}> Jueves a la mañana </Text>
+          <Text style={styles.textdias}> Jueves a la mañana</Text>
           <Input
             nombre="J1"
             handleHoraChange={handleHoraChange}
@@ -342,7 +342,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
         Por favor corrija este campo
          </Text></SafeAreaView>
         <SafeAreaView style={styles.diasyhorarios}>
-          <Text style={styles.textdias}> Viernes a la mañana </Text>
+          <Text style={styles.textdias}> Viernes a la mañana</Text>
           <Input
             nombre="V1"
             handleHoraChange={handleHoraChange}
@@ -360,7 +360,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
         Por favor corrija este campo
          </Text></SafeAreaView>
         <SafeAreaView style={styles.diasyhorarios}>
-          <Text style={styles.textdias}> Viernes a la tarde </Text>
+          <Text style={styles.textdias}> Viernes a la tarde</Text>
           <Input
             nombre="V3"
             handleHoraChange={handleHoraChange}
