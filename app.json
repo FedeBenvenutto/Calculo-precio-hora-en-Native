@@ -10,6 +10,11 @@
     "orientation": "portrait",
     "android": {
       "package": "com.federicoand.Calculoprecio"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "a187bd6d-926e-463c-b28a-04530bbca094"
+      }
     }
   },
   "updates": {

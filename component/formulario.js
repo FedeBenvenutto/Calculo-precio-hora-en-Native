@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { StyleSheet, View, ScrollView, SafeAreaView, TextInput } from "react-native";
 import moment from "moment";
-import { Text, Button } from "react-native-elements";
+import { Text, Button } from '@rneui/base';
 import Input from "./input";
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import Toast from "react-native-toast-message";
 
   const Formulario = () => {
 
@@ -39,7 +39,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
       setPrecioHora(0);
       setErrores({ ...Errores,  PH: false })
       } else {
-    let valor = text.replace(/[^0-9]/g, '')
+    let valor = text.replace(/[^0-9.]/g, '')
     setPrecioHora(valor)
     if (text >= 0) {
       setErrores({ ...Errores,  PH: false })
@@ -49,13 +49,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
   }};
   
   const handleHoraChange = (name, text) => {
-    if (text === "") {
+    let valor = text.replace(/[^0-9]/g, '')
+    .replace(/([0-9]{2})/, '$1:');
+    if (valor === "") {
       setHoraTrabajadas({ ...horaTrabajadas, [name]: "00:00"
        });
       setErrores({ ...Errores,  [name]: false})
        } else { 
-    let valor = text.replace(/[^0-9]/g, '')
-    .replace(/([0-9]{2})/, '$1:');
     setHoraTrabajadas({ ...horaTrabajadas, [name]: valor });
     let patronHora = /^([01]?[0-9]|2[0-3]):[0-5][0-9](:[0-5][0-9])?$/
     patronHora.test(valor) ?
@@ -64,23 +64,32 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
   };
 
   // MANEJO DE BOTONES 
+  const showToast = (mensaje) => {
+    Toast.show({
+      type: "success",
+      text1: `${mensaje}`,
+    });
+  };
   const Lunesmanana = ()=> {
     let valor=horaTrabajadas.L1;
     let valor2=horaTrabajadas.L2;
     setHoraTrabajadas({ ...horaTrabajadas, M1:valor, I1:valor, J1: valor, V1: valor, M2:valor2, 
       I2:valor2, J2: valor2, V2: valor2})
+    showToast("Copiado!")
   };
   const Lunestarde = ()=> {
     let valor=horaTrabajadas.L3;
     let valor2=horaTrabajadas.L4;
     setHoraTrabajadas({ ...horaTrabajadas, M3:valor, I3:valor, J3: valor, V3: valor, M4:valor2, 
       I4:valor2, J4: valor2, V4: valor2})
+    showToast("Copiado!")
   };
   const Guardar = () => {
     AsyncStorage.clear()
     AsyncStorage.setItem('precioHora', precioHora);
     AsyncStorage.setItem('Errores', JSON.stringify(Errores));
     AsyncStorage.setItem('horaTrabajadas', JSON.stringify(horaTrabajadas));
+    showToast("Guardado!")
   };
   const Reiniciar = () => {
     setHoraTrabajadas({
@@ -95,6 +104,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
       M3: false, M4: false, I3: false, I4: false, J3: false, J4: false, V3: false, V4: false, C1: false,
       C2: false, C3: false, C4: false, C5: false, C6: false, C7: false, C8: false, C9: false, C10: false});
     AsyncStorage.clear()
+    showToast("Reiniciado!")
   };
 
   // MANEJO DE ERRORES 
@@ -179,6 +189,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
         /1000/60*precioHora/60;
   
   return (
+    <>
     <ScrollView>
       <View style={styles.container}>
         <Text style={styles.titulo}>Calculo total de horas con precio</Text>
@@ -186,11 +197,12 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
           <Text style={styles.textdias}> Precio de la hora</Text>
           <TextInput
             style={styles.input2}
-            type="text"
+            keyboardType='numeric'
             name="precioHora"
-            value={precioHora === "0" ? "" : precioHora}
+            value={precioHora == "0" ? "" : precioHora}
             onChangeText={text => handlePrecioChange(text)}
             placeholder="0"
+
           ></TextInput>
         </SafeAreaView>
         <SafeAreaView style={styles.diasyhorarios}>
@@ -209,7 +221,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
           />
            
         </SafeAreaView>
-        <SafeAreaView style={Errores.C1 ? "" : styles.hidden}> 
+        <SafeAreaView style={!Errores.C1 && styles.hidden}> 
           <Text style={styles.textdiaserror}>
         Por favor corrija este campo
          </Text></SafeAreaView>
@@ -228,7 +240,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
             Errores={Errores.L4 || Errores.C2}
           />
         </SafeAreaView>
-        <SafeAreaView style={Errores.C2 ? "" : styles.hidden}> 
+        <SafeAreaView style={!Errores.C2 && styles.hidden}> 
           <Text style={styles.textdiaserror}>
         Por favor corrija este campo
          </Text></SafeAreaView>
@@ -247,7 +259,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
             Errores={Errores.M2 || Errores.C3}
           />
         </SafeAreaView>
-        <SafeAreaView style={Errores.C3 ? "" : styles.hidden}> 
+        <SafeAreaView style={!Errores.C3 && styles.hidden}> 
           <Text style={styles.textdiaserror}>
         Por favor corrija este campo
          </Text></SafeAreaView>
@@ -265,7 +277,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
           Errores={Errores.M4 || Errores.C4}
         />
         </SafeAreaView>
-        <SafeAreaView style={Errores.C4 ? "" : styles.hidden}> 
+        <SafeAreaView style={!Errores.C4 && styles.hidden}> 
           <Text style={styles.textdiaserror}>
         Por favor corrija este campo
          </Text></SafeAreaView>
@@ -283,7 +295,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
           Errores={Errores.I2 || Errores.C5}
         />
         </SafeAreaView>
-        <SafeAreaView style={Errores.C5 ? "" : styles.hidden}> 
+        <SafeAreaView style={!Errores.C5 && styles.hidden}> 
           <Text style={styles.textdiaserror}>
         Por favor corrija este campo
          </Text></SafeAreaView>
@@ -301,7 +313,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
           Errores={Errores.I4 || Errores.C6}
         />
         </SafeAreaView>
-        <SafeAreaView style={Errores.C6 ? "" : styles.hidden}> 
+        <SafeAreaView style={!Errores.C6 && styles.hidden}> 
           <Text style={styles.textdiaserror}>
         Por favor corrija este campo
          </Text></SafeAreaView>
@@ -319,7 +331,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
           Errores={Errores.J2 || Errores.C7}
         />
         </SafeAreaView>
-        <SafeAreaView style={Errores.C7 ? "" : styles.hidden}> 
+        <SafeAreaView style={!Errores.C7 && styles.hidden}> 
           <Text style={styles.textdiaserror}>
         Por favor corrija este campo
          </Text></SafeAreaView>
@@ -337,7 +349,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
           Errores={Errores.J4 || Errores.C8}
         />
         </SafeAreaView>
-        <SafeAreaView style={Errores.C8 ? "" : styles.hidden}> 
+        <SafeAreaView style={!Errores.C8 && styles.hidden}> 
           <Text style={styles.textdiaserror}>
         Por favor corrija este campo
          </Text></SafeAreaView>
@@ -355,7 +367,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
           Errores={Errores.V2 || Errores.C9}
         />
         </SafeAreaView>
-        <SafeAreaView style={Errores.C9 ? "" : styles.hidden}> 
+        <SafeAreaView style={!Errores.C9 && styles.hidden}> 
           <Text style={styles.textdiaserror}>
         Por favor corrija este campo
          </Text></SafeAreaView>
@@ -373,7 +385,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
           Errores={Errores.V4 || Errores.C10}
         />
         </SafeAreaView>
-        <SafeAreaView style={Errores.C10 ? "" : styles.hidden}> 
+        <SafeAreaView style={!Errores.C10 && styles.hidden}> 
           <Text style={styles.textdiaserror}>
         Por favor corrija este campo
          </Text></SafeAreaView>
@@ -414,6 +426,8 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
         </View>
       </View>
     </ScrollView>
+    <Toast />
+    </>
   );
 }
 
@@ -424,7 +438,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     textAlign: "center",
     color: "blue",
-    marginBottom: 50,
+    marginBottom: 20,
+    fontWeight: '800'
   },
   container: {
     flex: 1,
@@ -449,11 +464,12 @@ const styles = StyleSheet.create({
   input2: {
     height: 50,
     margin: 5,
-    borderWidth: 1,
+    borderWidth: 0.5,
     padding: 10,
-    minWidth: 170,
-    maxWidth: 1000,
+    minWidth: 165,
+    maxWidth: 900,
     fontSize: 20,
+    borderRadius: 15
   },
   hidden: {
    hidden: false,
